@@ -1,0 +1,65 @@
+= JAX-RS Analyzer Gradle Plugin
+Joachim Grimm
+
+Gradle plugin for the https://github.com/sdaschner/jaxrs-analyzer[JAX-RS Analyzer].
+
+Using the plugin:
+
+----
+
+buildscript {
+    dependencies {
+        classpath 'com.github.grimmjo:jaxrs-analyser-gradle-plugin:0.1-SNAPSHOT'
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
+----
+
+After building your project, the documentation resides under 'build/jaxrs-analyzer/'.
+
+Plugin configuration
+
+== Configuration
+
+----
+jaxRsAnalyzer {
+    // Available backends are plaintext (default), swagger and asciidoc
+    backend 'swagger'
+    // Domain of the deployed project, defaults to ""
+    domain 'localhost:8080'
+    // Comma separated list of Swagger schemes (only for if backend is swagger, defaults to http)
+    schemes 'http', 'https'
+    // Enables rendering of Swagger tags (defaults to false -> default tag will be used)
+    renderTags true
+    // The number at which path position the Swagger tags will be extracted (defaults to 0)
+    tagPathOffset 0
+    // Directory (relative to buildDir) where resources will be generated (defaults to jaxrs-analyzer)
+    outputDirectory 'jaxrs-analyzer'
+}
+----
+
+=== Output directory
+
+The `outputDirectory` parameter defines the relative path to the build directory.
+
+=== Backend
+The `backend` parameter specifies the output format of the analysis.
+The available formats are Plaintext, AsciiDoc and Swagger.
+
+For further use of the created formats see the https://github.com/sdaschner/jaxrs-analyzer/blob/master/Documentation.adoc[JAX-RS Analyzer documentation].
+
+=== Domain
+With `domain` the user may specify the URL which will contain the REST API later on.
+Tools like Swagger make use of this information (and offer possibilities to send calls directly, etc.).
+
+=== Swagger options
+
+* `schemes` The comma separated list of Swagger schemes: `http` (default), `https`, `ws`, `wss`
+* `renderTags` Enables rendering of Swagger tags (defaults to false, then the default tag will be used)
+* `tagPathOffset` The number at which path position the Swagger tags will be extracted (defaults to 0)
+
+== Contributing
+Feedback, bug reports and ideas for improvement are very welcome! Feel free to fork, comment, file an issue, etc. ;-)

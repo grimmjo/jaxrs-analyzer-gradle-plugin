@@ -1,0 +1,22 @@
+apply plugin: 'groovy'
+apply plugin: 'maven-publish'
+
+group = 'com.github.grimmjo'
+version = '0.1-SNAPSHOT'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile gradleApi()
+    compile 'com.sebastian-daschner:jaxrs-analyzer:0.15'
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
