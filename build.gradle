@@ -79,6 +79,7 @@ publishing {
             version project.version
             pom.withXml {
                 def root = asNode()
+                root.appendNode('description', 'JAX-RS Analyzer Gradle Plugin')
                 root.appendNode('name', 'JAX-RS Analyzer Gradle Plugin')
                 root.appendNode('url', 'https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin')
                 root.children().last() + pomConfig
