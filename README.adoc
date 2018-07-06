@@ -1,6 +1,7 @@
 = JAX-RS Analyzer Gradle Plugin
-[![Build Status](https://api.travis-ci.org/grimmjo/jaxrs-analyzer-gradle-plugin.svg?branch=master)](https://travis-ci.org/grimmjo/jaxrs-analyzer-gradle-plugin)
-[![Download](https://api.bintray.com/packages/grimmjo/maven-releases/jaxrs-analyzer-gradle-plugin/images/download.svg) ](https://bintray.com/grimmjo/maven-releases/jaxrs-analyzer-gradle-plugin/_latestVersion)
+
+image::https://api.travis-ci.org/grimmjo/jaxrs-analyzer-gradle-plugin.svg?branch=master[link="https://travis-ci.org/grimmjo/jaxrs-analyzer-gradle-plugin"]
+image::https://api.bintray.com/packages/grimmjo/maven-releases/jaxrs-analyzer-gradle-plugin/images/download.svg[link="https://bintray.com/grimmjo/maven-releases/jaxrs-analyzer-gradle-plugin/_latestVersion"]
 
 Gradle plugin for the https://github.com/sdaschner/jaxrs-analyzer[JAX-RS Analyzer].
 
