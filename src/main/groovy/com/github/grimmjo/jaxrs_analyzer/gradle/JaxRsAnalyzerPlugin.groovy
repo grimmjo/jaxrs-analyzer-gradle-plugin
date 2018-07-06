@@ -1,4 +1,4 @@
-package com.github.grimmjo.jaxrs_analyser.gradle
+package com.github.grimmjo.jaxrs_analyzer.gradle
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

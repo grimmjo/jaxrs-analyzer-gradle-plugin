@@ -9,7 +9,7 @@ Using the plugin:
 
 buildscript {
     dependencies {
-        classpath 'com.github.grimmjo:jaxrs-analyser-gradle-plugin:0.1-SNAPSHOT'
+        classpath 'com.github.grimmjo:jaxrs-analyser-gradle-plugin:0.1'
     }
     repositories {
         mavenCentral()

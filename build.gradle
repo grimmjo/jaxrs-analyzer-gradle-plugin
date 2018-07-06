@@ -1,22 +1,107 @@
-apply plugin: 'groovy'
-apply plugin: 'maven-publish'
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+}
 
-group = 'com.github.grimmjo'
-version = '0.1-SNAPSHOT'
+plugins {
+    id "maven-publish"
+    id "com.jfrog.bintray" version "1.8.3"
+    id "groovy"
+}
+
+
 
 repositories {
+    mavenCentral()
     jcenter()
 }
+
+group = 'com.github.grimmjo'
+version = '0.1'
 
 dependencies {
     compile gradleApi()
     compile 'com.sebastian-daschner:jaxrs-analyzer:0.15'
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+javadoc.failOnError = false
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "grimmjo"
+            name "Joachim Grimm"
+            email "grimm.jo@web.de"
+        }
+    }
+
+    scm {
+        url "https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin"
+    }
+}
+
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        mavenPublication(MavenPublication) {
             from components.java
+            artifact sourcesJar {
+                classifier "sources"
+            }
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+            groupId project.group
+            artifactId project.name
+            version project.version
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('name', 'JAX-RS Analyzer Gradle Plugin')
+                root.appendNode('url', 'https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+bintray {
+    user = System.getProperty('bintray.user')
+    key = System.getProperty('bintray.key')
+    publications = ['mavenPublication']
+
+    pkg {
+        repo = 'maven-releases'
+        name = 'jaxrs-analyzer-gradle-plugin'
+        userOrg = 'grimmjo'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin.git'
+        version {
+            name = project.version
+            desc = project.version
+            released  = new Date()
         }
     }
 }

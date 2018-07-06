@@ -1,4 +1,4 @@
-package com.github.grimmjo.jaxrs_analyser.gradle
+package com.github.grimmjo.jaxrs_analyzer.gradle
 
 import com.sebastian_daschner.jaxrs_analyzer.JAXRSAnalyzer
 import com.sebastian_daschner.jaxrs_analyzer.backend.Backend
