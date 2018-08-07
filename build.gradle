@@ -21,11 +21,11 @@ repositories {
 }
 
 group = 'com.github.grimmjo'
-version = '0.2-SNAPSHOT'
+version = '0.2'
 
 dependencies {
     compile gradleApi()
-    compileOnly 'com.sebastian-daschner:jaxrs-analyzer:0.16'
+    compile 'com.sebastian-daschner:jaxrs-analyzer:0.16'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

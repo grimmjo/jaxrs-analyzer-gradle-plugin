@@ -11,26 +11,38 @@ Using the plugin:
 
 buildscript {
     dependencies {
-        classpath 'com.github.grimmjo:jaxrs-analyzer-gradle-plugin:0.1'
+        classpath 'com.github.grimmjo:jaxrs-analyzer-gradle-plugin:0.2'
     }
     repositories {
-        mavenCentral()
         jcenter()
     }
 }
+
+apply plugin: "jaxrs-analyzer-gradle-plugin"
 
 ----
 
 After building your project, the documentation resides under 'build/jaxrs-analyzer/'.
 
-Plugin configuration
+== Changelog
+
+=== Version 0.2
+
+* adds gradle's cache support to analyze task
+* generate documentation for multiple backends
+* updates jax-rs-analyzer dependency to 0.16
+* adds a example build
+
+== Full Example
+
+A full working example can be found https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin-samples[here]
 
 == Configuration
 
 ----
 jaxRsAnalyzer {
-    // Available backends are plaintext (default), swagger and asciidoc
-    backend 'swagger'
+    // Available backends are plaintext, asciidoc and swagger (default)
+    backend 'swagger', 'asciidoc'
     // Domain of the deployed project, defaults to ""
     domain 'localhost:8080'
     // Comma separated list of Swagger schemes (only for if backend is swagger, defaults to http)
@@ -50,7 +62,14 @@ The `outputDirectory` parameter defines the relative path to the build directory
 
 === Backend
 The `backend` parameter specifies the output format of the analysis.
-The available formats are Plaintext, AsciiDoc and Swagger.
+The available formats are plaintext, asciidoc and swagger.
+Multiple values are allowed. E.g.
+jaxRsAnalyzer {
+    // Available backends are plaintext (default), swagger and asciidoc
+    backend 'swagger', 'asciidoc'
+    ...
+}
+This would generate the documentation for swagger and asciidoc.
 
 For further use of the created formats see the https://github.com/sdaschner/jaxrs-analyzer/blob/master/Documentation.adoc[JAX-RS Analyzer documentation].
 

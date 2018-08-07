@@ -4,6 +4,8 @@ import com.sebastian_daschner.jaxrs_analyzer.JAXRSAnalyzer
 import com.sebastian_daschner.jaxrs_analyzer.backend.Backend
 import com.sebastian_daschner.jaxrs_analyzer.backend.swagger.SwaggerOptions
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.model.Path
 
@@ -16,28 +18,28 @@ import java.util.stream.Stream
  */
 class JaxRsAnalyzerTask extends DefaultTask {
 
+    @InputDirectory
+    File inputDirectory
+
+    @OutputDirectory
+    File outputDirectory
+
     @TaskAction
     void analyze() {
-        File outputDirectory
-        if (outputDirectory == null) {
-            outputDirectory = new File(project.buildDir, "jaxrs-analyzer")
-        } else {
-            outputDirectory = new File(project.buildDir, project.jaxRsAnalyzer.outputDirectory)
-        }
 
-        Set<Path> dependencies = new HashSet<>()
+        Set<Path> classPaths = new HashSet<>()
         project.configurations.compile.each {
-            dependencies.add(it.toPath())
+            classPaths.add(it.toPath())
         }
         project.configurations.runtime.each {
-            dependencies.add(it.toPath())
+            classPaths.add(it.toPath())
         }
-        Set<Path> outputDir = new HashSet<>()
-        outputDir.add(project.sourceSets.main.java.outputDir.toPath())
+        Set<Path> projectClasspaths = new HashSet<>()
+        projectClasspaths.add(inputDirectory.toPath())
 
-        Set<Path> sourceDirs = new HashSet<>()
+        Set<Path> projectSourcePaths = new HashSet<>()
         project.sourceSets.main.java.getSrcDirs().each {
-            sourceDirs.add(it.toPath())
+            projectSourcePaths.add(it.toPath())
         }
 
         final Map<String, String> config = new HashMap<>()
@@ -46,26 +48,29 @@ class JaxRsAnalyzerTask extends DefaultTask {
         config.put(SwaggerOptions.RENDER_SWAGGER_TAGS, project.jaxRsAnalyzer.renderTags.toString())
         config.put(SwaggerOptions.SWAGGER_TAGS_PATH_OFFSET, project.jaxRsAnalyzer.tagPathOffset.toString())
 
-        final Backend backend = JAXRSAnalyzer.constructBackend(project.jaxRsAnalyzer.backend)
-        backend.configure(config)
-        outputDirectory.mkdirs()
-        File outputFile
-        switch (project.jaxRsAnalyzer.backend) {
-            case 'swagger':
-                outputFile = new File(outputDirectory, 'swagger.json')
-                break
-            case 'plaintext':
-                outputFile = new File(outputDirectory, 'rest-resources.txt')
-                break
-            case 'asciidoc':
-                outputFile = new File(outputDirectory, 'rest-resources.adoc')
-                break
-        }
+        project.jaxRsAnalyzer.backend.each {
+            final Backend backend = JAXRSAnalyzer.constructBackend(it)
+            backend.configure(config)
+            File outputFile = null
+            switch (it) {
+                case 'swagger':
+                    outputFile = new File(outputDirectory, 'swagger.json')
+                    break
+                case 'plaintext':
+                    outputFile = new File(outputDirectory, 'rest-resources.txt')
+                    break
+                case 'asciidoc':
+                    outputFile = new File(outputDirectory, 'rest-resources.adoc')
+                    break
+            }
 
-        if (outputFile.exists()) {
-            outputFile.delete()
+            if (outputFile != null) {
+                if (outputFile.exists()) {
+                    outputFile.delete()
+                }
+                new JAXRSAnalyzer(projectClasspaths, projectSourcePaths, classPaths, project.getName(), project.getVersion(), backend, outputFile.toPath()).analyze()
+            }
         }
-
-        new JAXRSAnalyzer(outputDir, sourceDirs, dependencies, project.getName(), project.getVersion(), backend, outputFile.toPath()).analyze()
     }
+
 }

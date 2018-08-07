@@ -5,7 +5,7 @@ package com.github.grimmjo.jaxrs_analyzer.gradle
  */
 class JaxRsAnalyzerExtension {
 
-    String backend = 'swagger'
+    String[] backend = ['swagger']
     String outputDirectory
 
     String[] schemes = ['http']
