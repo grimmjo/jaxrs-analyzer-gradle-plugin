@@ -9,6 +9,8 @@ plugins {
     id "maven-publish"
     id "com.jfrog.bintray" version "1.8.3"
     id "groovy"
+    id "com.gradle.plugin-publish" version "0.10.0"
+    id "java-gradle-plugin"
 }
 
 
@@ -19,11 +21,11 @@ repositories {
 }
 
 group = 'com.github.grimmjo'
-version = '0.1'
+version = '0.2-SNAPSHOT'
 
 dependencies {
     compile gradleApi()
-    compile 'com.sebastian-daschner:jaxrs-analyzer:0.15'
+    compileOnly 'com.sebastian-daschner:jaxrs-analyzer:0.16'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -104,5 +106,37 @@ bintray {
             desc = project.version
             released  = new Date()
         }
+    }
+}
+
+gradlePlugin {
+    plugins {
+        analyzerPlugin {
+            id = 'com.github.grimmjo'
+            implementationClass = 'com.github.grimmjo.jaxrs_analyzer.gradle.JaxRsAnalyzerPlugin'
+        }
+    }
+}
+
+
+pluginBundle {
+    website = 'https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin'
+    vcsUrl = 'https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin'
+    description = 'Gradle plugin for the JAX-RS Analyzer.'
+    plugins {
+
+        // first plugin
+        analyzerPlugin {
+            // id is captured from java-gradle-plugin configuration
+            displayName = 'JAX-RS Analyzer Gradle Plugin'
+            tags = ['jaxrs', 'swagger', 'asciidoc']
+            version = project.version
+        }
+    }
+
+    mavenCoordinates {
+        groupId = "com.github.grimmjo"
+        artifactId = "jaxrs-analyzer-gradle-plugin"
+        version = project.version
     }
 }
