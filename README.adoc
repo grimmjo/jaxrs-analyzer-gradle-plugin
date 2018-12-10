@@ -53,6 +53,8 @@ jaxRsAnalyzer {
     tagPathOffset 0
     // Directory (relative to buildDir) where resources will be generated (defaults to jaxrs-analyzer)
     outputDirectory 'jaxrs-analyzer'
+    // Wether jaxrs-analyzer should take the java or kotlin source set as your endoints
+    kotlin true
 }
 ----
 
