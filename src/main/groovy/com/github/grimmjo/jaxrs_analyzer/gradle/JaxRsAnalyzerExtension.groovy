@@ -12,5 +12,6 @@ class JaxRsAnalyzerExtension {
     String domain = ''
     Boolean renderTags = false
     Integer tagPathOffset = 0
+    Boolean kotlin = false
 }
 
