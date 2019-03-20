@@ -7,7 +7,7 @@ class JaxRsAnalyzerExtension {
 
     String[] backend = ['swagger']
     String outputDirectory
-
+    String outputFileBaseName
     String[] schemes = ['http']
     String domain = ''
     Boolean renderTags = false

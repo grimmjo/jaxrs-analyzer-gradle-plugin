@@ -25,7 +25,7 @@ version = '0.2'
 
 dependencies {
     compile gradleApi()
-    compile 'com.sebastian-daschner:jaxrs-analyzer:0.16'
+    compile 'com.sebastian-daschner:jaxrs-analyzer:0.17'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
