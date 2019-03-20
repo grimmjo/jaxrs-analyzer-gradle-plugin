@@ -55,7 +55,7 @@ class JaxRsAnalyzerTask extends DefaultTask {
         project.jaxRsAnalyzer.backend.each {
             final Backend backend = JAXRSAnalyzer.constructBackend(it)
             backend.configure(config)
-            String outputFileBaseName = project.jaxRsAnalyzer.outputFileBaseName == null ? rest-resources : project.jaxRsAnalyzer.outputFileBaseName
+            String outputFileBaseName = project.jaxRsAnalyzer.outputFileBaseName == null ? 'rest-resources' : project.jaxRsAnalyzer.outputFileBaseName
             File outputFile = null
             switch (it) {
                 case 'swagger':
