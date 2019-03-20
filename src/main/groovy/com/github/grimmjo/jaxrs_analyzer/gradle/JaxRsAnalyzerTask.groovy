@@ -1,5 +1,6 @@
 package com.github.grimmjo.jaxrs_analyzer.gradle
 
+import com.sebastian_daschner.jaxrs_analyzer.JAXRSAnalyzer.Analysis
 import com.sebastian_daschner.jaxrs_analyzer.JAXRSAnalyzer
 import com.sebastian_daschner.jaxrs_analyzer.backend.Backend
 import com.sebastian_daschner.jaxrs_analyzer.backend.swagger.SwaggerOptions
@@ -73,7 +74,17 @@ class JaxRsAnalyzerTask extends DefaultTask {
                 if (outputFile.exists()) {
                     outputFile.delete()
                 }
-                new JAXRSAnalyzer(projectClasspaths, projectSourcePaths, classPaths, project.getName(), project.getVersion(), backend, outputFile.toPath()).analyze()
+
+                Analysis analysis = new Analysis()
+                analysis.addProjectClassPath(projectClasspaths)
+                analysis.addProjectSourcePath(projectSourcePaths)
+                analysis.addClassPath(classPaths)
+                analysis.setProjectName(project.getName())
+                analysis.setProjectVersion(project.getVersion())
+                analysis.configureBackend(backend)
+                analysis.setOutputLocation(outputFile.toPath())
+
+                new JAXRSAnalyzer(analysis).analyze()
             }
         }
     }
