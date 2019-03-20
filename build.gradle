@@ -20,8 +20,8 @@ repositories {
     jcenter()
 }
 
-group = 'com.github.grimmjo'
-version = '0.2'
+group = 'com.github.finrod2002'
+version = '0.3'
 
 dependencies {
     compile gradleApi()
@@ -55,14 +55,14 @@ def pomConfig = {
     }
     developers {
         developer {
-            id "grimmjo"
+            id "finrod2002"
             name "Joachim Grimm"
             email "grimm.jo@web.de"
         }
     }
 
     scm {
-        url "https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin"
+        url "https://github.com/finrod2002/jaxrs-analyzer-gradle-plugin"
     }
 }
 
@@ -83,7 +83,7 @@ publishing {
                 def root = asNode()
                 root.appendNode('description', 'JAX-RS Analyzer Gradle Plugin')
                 root.appendNode('name', 'JAX-RS Analyzer Gradle Plugin')
-                root.appendNode('url', 'https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin')
+                root.appendNode('url', 'https://github.com/finrod2002/jaxrs-analyzer-gradle-plugin')
                 root.children().last() + pomConfig
             }
         }
@@ -98,9 +98,9 @@ bintray {
     pkg {
         repo = 'maven-releases'
         name = 'jaxrs-analyzer-gradle-plugin'
-        userOrg = 'grimmjo'
+        userOrg = 'finrod2002'
         licenses = ['Apache-2.0']
-        vcsUrl = 'https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin.git'
+        vcsUrl = 'https://github.com/finrod2002/jaxrs-analyzer-gradle-plugin.git'
         version {
             name = project.version
             desc = project.version
@@ -112,16 +112,16 @@ bintray {
 gradlePlugin {
     plugins {
         analyzerPlugin {
-            id = 'com.github.grimmjo'
-            implementationClass = 'com.github.grimmjo.jaxrs_analyzer.gradle.JaxRsAnalyzerPlugin'
+            id = 'com.github.finrod2002'
+            implementationClass = 'com.github.finrod2002.jaxrs_analyzer.gradle.JaxRsAnalyzerPlugin'
         }
     }
 }
 
 
 pluginBundle {
-    website = 'https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin'
-    vcsUrl = 'https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin'
+    website = 'https://github.com/finrod2002/jaxrs-analyzer-gradle-plugin'
+    vcsUrl = 'https://github.com/finrod2002/jaxrs-analyzer-gradle-plugin'
     description = 'Gradle plugin for the JAX-RS Analyzer.'
     plugins {
 
@@ -135,7 +135,7 @@ pluginBundle {
     }
 
     mavenCoordinates {
-        groupId = "com.github.grimmjo"
+        groupId = "com.github.finrod2002"
         artifactId = "jaxrs-analyzer-gradle-plugin"
         version = project.version
     }
