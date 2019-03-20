@@ -29,22 +29,22 @@ class JaxRsAnalyzerTask extends DefaultTask {
     @TaskAction
     void analyze() {
 
-        Set<Path> classPaths = new HashSet<>()
+        Analysis analysis = new Analysis()
         project.configurations.compileClasspath.each {
-            classPaths.add(it.toPath())
+            analysis.addClassPath(it.toPath())
+        }
+        project.configurations.runtimeClasspath.each {
+            analysis.addClassPath(it.toPath())
         }
         project.configurations.compile.each {
-            classPaths.add(it.toPath())
+            analysis.addClassPath(it.toPath())
         }
         project.configurations.runtime.each {
-            classPaths.add(it.toPath())
+            analysis.addClassPath(it.toPath())
         }
-        Set<Path> projectClasspaths = new HashSet<>()
-        projectClasspaths.add(inputDirectory.toPath())
-
-        Set<Path> projectSourcePaths = new HashSet<>()
+        analysis.addProjectClassPath(inputDirectory.toPath())
         project.sourceSets.main.java.getSrcDirs().each {
-            projectSourcePaths.add(it.toPath())
+            analysis.addProjectSourcePath(it.toPath())
         }
 
         final Map<String, String> config = new HashMap<>()
@@ -75,13 +75,9 @@ class JaxRsAnalyzerTask extends DefaultTask {
                     outputFile.delete()
                 }
 
-                Analysis analysis = new Analysis()
-                analysis.addProjectClassPath(projectClasspaths)
-                analysis.addProjectSourcePath(projectSourcePaths)
-                analysis.addClassPath(classPaths)
                 analysis.setProjectName(project.getName())
                 analysis.setProjectVersion(project.getVersion())
-                analysis.configureBackend(backend)
+                analysis.setBackend(backend)
                 analysis.setOutputLocation(outputFile.toPath())
 
                 new JAXRSAnalyzer(analysis).analyze()
