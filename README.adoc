@@ -26,12 +26,21 @@ After building your project, the documentation resides under 'build/jaxrs-analyz
 
 == Changelog
 
+=== Version 0.3
+* updates jax-rs-analyzer dependency to 0.17
+* updates gradle to 4.10.2
+
 === Version 0.2
 
 * adds gradle's cache support to analyze task
 * generate documentation for multiple backends
 * updates jax-rs-analyzer dependency to 0.16
 * adds a example build
+
+== Roadmap
+
+=== Version 0.4
+* support groovy and kotlin classes for analysis
 
 == Full Example
 

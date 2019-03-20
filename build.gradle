@@ -13,15 +13,13 @@ plugins {
     id "java-gradle-plugin"
 }
 
-
-
 repositories {
     mavenCentral()
     jcenter()
 }
 
 group = 'com.github.grimmjo'
-version = '0.2'
+version = '0.3'
 
 dependencies {
     compile gradleApi()
