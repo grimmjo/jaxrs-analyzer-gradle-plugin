@@ -9,7 +9,7 @@ plugins {
     id "maven-publish"
     id "com.jfrog.bintray" version "1.8.3"
     id "groovy"
-    id "com.gradle.plugin-publish" version "0.10.0"
+    id "com.gradle.plugin-publish" version "0.10.1"
     id "java-gradle-plugin"
 }
 
