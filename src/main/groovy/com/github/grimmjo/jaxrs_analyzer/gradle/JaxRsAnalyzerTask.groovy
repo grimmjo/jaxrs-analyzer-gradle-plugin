@@ -15,6 +15,7 @@ import java.util.stream.Stream
 /**
  *
  * @author grimmjo
+ * @author finrod2002
  */
 class JaxRsAnalyzerTask extends DefaultTask {
 
@@ -28,6 +29,9 @@ class JaxRsAnalyzerTask extends DefaultTask {
     void analyze() {
 
         Set<Path> classPaths = new HashSet<>()
+        project.configurations.implementation.each {
+            classPaths.add(it.toPath())
+        }
         project.configurations.compile.each {
             classPaths.add(it.toPath())
         }
@@ -51,16 +55,17 @@ class JaxRsAnalyzerTask extends DefaultTask {
         project.jaxRsAnalyzer.backend.each {
             final Backend backend = JAXRSAnalyzer.constructBackend(it)
             backend.configure(config)
+            String outputFileBaseName = project.jaxRsAnalyzer.outputFileBaseName == null ? rest-resources : project.jaxRsAnalyzer.outputFileBaseName
             File outputFile = null
             switch (it) {
                 case 'swagger':
-                    outputFile = new File(outputDirectory, 'swagger.json')
+                    outputFile = new File(outputDirectory, outputFileBaseName + '-swagger.json')
                     break
                 case 'plaintext':
-                    outputFile = new File(outputDirectory, 'rest-resources.txt')
+                    outputFile = new File(outputDirectory, outputFileBaseName + '-plaintext.txt')
                     break
                 case 'asciidoc':
-                    outputFile = new File(outputDirectory, 'rest-resources.adoc')
+                    outputFile = new File(outputDirectory, outputFileBaseName + '-asciidoc.adoc')
                     break
             }
 
