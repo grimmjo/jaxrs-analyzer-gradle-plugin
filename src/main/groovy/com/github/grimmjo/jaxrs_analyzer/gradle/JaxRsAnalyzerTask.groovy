@@ -29,7 +29,7 @@ class JaxRsAnalyzerTask extends DefaultTask {
     void analyze() {
 
         Set<Path> classPaths = new HashSet<>()
-        project.configurations.implementation.each {
+        project.configurations.compileClasspath.each {
             classPaths.add(it.toPath())
         }
         project.configurations.compile.each {
