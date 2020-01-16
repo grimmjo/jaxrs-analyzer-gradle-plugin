@@ -20,7 +20,11 @@ class JaxRsAnalyzerPlugin implements Plugin<Project> {
                 } else {
                     it.outputDirectory = buildDirectory.resolve(project.jaxRsAnalyzer.outputDirectory)
                 }
-                it.inputDirectory = project.sourceSets.main.java.outputDir
+                if (project.jaxRsAnalyzer.kotlin == true) {
+                    it.inputDirectory = project.sourceSets.main.kotlin.outputDir
+                } else {
+                    it.inputDirectory = project.sourceSets.main.java.outputDir
+                }
             }
             dependencies {
                 delegate.compile("com.sebastian-daschner:jaxrs-analyzer:0.17")
