@@ -38,10 +38,10 @@ class JaxRsAnalyzerTask extends DefaultTask {
         project.configurations.compileClasspath.each {
             analysis.addClassPath(it.toPath())
         }
-        project.configurations.compile.each {
+        project.configurations.compileOnly.each {
             analysis.addClassPath(it.toPath())
         }
-        project.configurations.runtime.each {
+        project.configurations.runtimeOnly.each {
             analysis.addClassPath(it.toPath())
         }
         analysis.addProjectClassPath(inputDirectory.toPath())
