@@ -23,7 +23,7 @@ version = '0.3'
 
 dependencies {
     compileOnly gradleApi()
-    compileOnly 'com.sebastian-daschner:jaxrs-analyzer:0.18-SNAPSHOT'
+    compileOnly 'com.sebastian-daschner:jaxrs-analyzer:0.17'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
