@@ -27,13 +27,13 @@ dependencies {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
+    archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
 
 javadoc.failOnError = false
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier = 'javadoc'
     from javadoc.destinationDir
 }
 
@@ -69,10 +69,10 @@ publishing {
         mavenPublication(MavenPublication) {
             from components.java
             artifact sourcesJar {
-                classifier "sources"
+                archiveClassifier = "sources"
             }
             artifact javadocJar {
-                classifier "javadoc"
+                archiveClassifier = "javadoc"
             }
             groupId project.group
             artifactId project.name
