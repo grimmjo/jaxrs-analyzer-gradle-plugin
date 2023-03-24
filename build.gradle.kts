@@ -9,8 +9,8 @@ repositories {
     mavenCentral()
 }
 
-group = "com.github.grimmjo"
-version = "0.4-SNAPSHOT"
+group = "io.github.grimmjo"
+version = "0.4"
 
 dependencies {
     implementation(gradleApi())
@@ -22,8 +22,8 @@ gradlePlugin {
     vcsUrl.set("https://github.com/grimmjo/jaxrs-analyzer-gradle-plugin")
     plugins {
         create("analyzerPlugin") {
-            id = "com.github.grimmjo.jaxrs-analyzer"
-            implementationClass = "com.github.grimmjo.jaxrs_analyzer.gradle.JaxRsAnalyzerPlugin"
+            id = "io.github.grimmjo.jaxrs-analyzer"
+            implementationClass = "io.github.grimmjo.jaxrs_analyzer.JaxRsAnalyzerPlugin"
             displayName = "JAX-RS Analyzer Gradle Plugin"
             description = "Gradle plugin for the JAX-RS Analyzer."
             tags.set(listOf("jaxrs", "swagger", "asciidoc"))

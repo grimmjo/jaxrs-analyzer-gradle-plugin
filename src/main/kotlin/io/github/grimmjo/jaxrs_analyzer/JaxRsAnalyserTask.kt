@@ -1,4 +1,4 @@
-package com.github.grimmjo.jaxrs_analyzer
+package io.github.grimmjo.jaxrs_analyzer
 
 import com.sebastian_daschner.jaxrs_analyzer.JAXRSAnalyzer
 import com.sebastian_daschner.jaxrs_analyzer.backend.swagger.SwaggerOptions

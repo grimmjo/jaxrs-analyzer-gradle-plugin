@@ -7,7 +7,7 @@ Using the plugin:
 ----
 
 plugins {
-  id("com.github.grimmjo.jaxrs-analyzer") version "0.3"
+  id("io.github.grimmjo.jaxrs-analyzer") version "0.4"
 }
 
 ----
@@ -17,6 +17,9 @@ After building your project, the documentation resides under 'build/jaxrs-analyz
 == Changelog
 
 === Version 0.4
+
+IMPORTANT: The plugin id changed from `com.github.grimmjo` to `io.github.grimmjo.jaxrs-analyzer`
+
 * update to gradle 8
 * migrates the plugin to kotlin
 * support all main source sets

@@ -1,4 +1,4 @@
-package com.github.grimmjo.jaxrs_analyzer
+package io.github.grimmjo.jaxrs_analyzer
 
 import org.gradle.api.model.ObjectFactory
 import org.gradle.kotlin.dsl.listProperty
