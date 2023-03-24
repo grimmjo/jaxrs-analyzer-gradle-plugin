@@ -1,30 +1,26 @@
 = JAX-RS Analyzer Gradle Plugin
 
-image::https://api.travis-ci.org/grimmjo/jaxrs-analyzer-gradle-plugin.svg?branch=master[link="https://travis-ci.org/grimmjo/jaxrs-analyzer-gradle-plugin"]
-image::https://api.bintray.com/packages/grimmjo/maven-releases/jaxrs-analyzer-gradle-plugin/images/download.svg[link="https://bintray.com/grimmjo/maven-releases/jaxrs-analyzer-gradle-plugin/_latestVersion"]
-
 Gradle plugin for the https://github.com/sdaschner/jaxrs-analyzer[JAX-RS Analyzer].
 
 Using the plugin:
 
 ----
 
-buildscript {
-    dependencies {
-        classpath 'com.github.grimmjo:jaxrs-analyzer-gradle-plugin:0.2'
-    }
-    repositories {
-        jcenter()
-    }
+plugins {
+  id("com.github.grimmjo.jaxrs-analyzer") version "0.3"
 }
-
-apply plugin: "jaxrs-analyzer-gradle-plugin"
 
 ----
 
 After building your project, the documentation resides under 'build/jaxrs-analyzer/'.
 
 == Changelog
+
+=== Version 0.4
+* update to gradle 8
+* migrates the plugin to kotlin
+* support all main source sets
+
 
 === Version 0.3
 * updates jax-rs-analyzer dependency to 0.17
